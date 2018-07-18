@@ -1017,6 +1017,17 @@ export class _Window extends EmitterBase {
         return this.wire.sendAction('stop-window-navigation', Object.assign({}, this.identity)).then(() => undefined);
     }
 
+    /**
+     * Sets or removes aspect ratio of the window.
+     * @param { number } ratio Aspect ratio to set, or <= 0 to remove the aspect ratio
+     * @param { number } [extraWidth = 0] Extra width of window to not consider in the aspect ratio
+     * @param { number } [extraHeight = 0] Extra height of window to not consider in the aspect ratio
+     * @return {Promise.<void>}
+     */
+    public setAspectRatio(ratio: number, extraWidth: number = 0, extraHeight: number = 0): Promise<void> {
+        return this.wire.sendAction('set-aspect-ratio',
+            Object.assign({}, this.identity, { ratio, extraWidth, extraHeight })).then(() => undefined);
+    }
 }
 // @ts-ignore: "on" return types incompatible with EventEmitter (this)
 // tslint:disable-next-line
